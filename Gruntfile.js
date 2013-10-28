@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                 //源文件
                 src: 'src/Leaflet.smart-popup.js',
                 //目标文件
-                dest: 'build/Leaflet.smart-popup.min.js'
+                dest: 'dist/Leaflet.smart-popup.min.js'
             }
         }
     });

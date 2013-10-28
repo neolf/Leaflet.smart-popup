@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Awesome Markers Example: Basic</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../dist/leaflet.smart-popup.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+    <![endif]-->
+</head>
+<body>
+<div id="map" style="width: 800px; height: 600px"></div>
+
+<script src="../dist/leaflet-custom-src.js"></script>
+<script src="../src/Leaflet.smart-popup.js"></script>
+
+<script>
+
+//    var southWest = new L.LatLng(south, west),
+//        northEast = new L.LatLng(north, east),
+//        bounds = new L.LatLngBounds(southWest, northEast);
+//    .setMaxBounds(bounds)
+   var map = L.map('map').setView([51.51932, -0.0503], 13);
+
+
+    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+    }).addTo(map);
+
+
+    for(var i = 0;i<2;i++){
+        for(var j = 0;j<3;j++){
+            var popup = L.smartPopup().setTipOnUpper(i>=1).setXOffset(80*(j-1))
+                    .setContent("Hello,I'm Smart popup!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            L.marker([51.5 + i*0.03 , -0.09 + j*0.04]).addTo(map)
+                    .bindPopup(popup);
+
+        }
+    }
+
+
+    var popup = L.smartPopup().setTipOnUpper(true);
+    function onMapClick(e) {
+        popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
+        console.log();
+    }
+
+    map.on('click', onMapClick);
+
+</script>
+</body>
+</html>
